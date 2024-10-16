@@ -1,0 +1,13 @@
+# IntelliJ project files
+.idea
+*.iml
+*.ipr
+*.iws
+hs_err_*.log
+replay_*.log
+
+### Maven template
+target/
+.DS_Store
+.gradle
+build
