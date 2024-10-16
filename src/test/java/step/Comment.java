@@ -50,14 +50,18 @@ public class Comment {
 
             List<CommentModel> commentData = Excel.readData(pathExcel);
 
-            // Random data in excel file
+            /*
+            * Random data in excel file
+            * */
             Random random = new Random();
-            int indexCommentData = random.nextInt(commentData.size());
+            int indexCommentData1 = random.nextInt(commentData.size());
+            int indexCommentData2 = random.nextInt(commentData.size());
 
-            CommentModel commentRecord = commentData.get(indexCommentData);
+            CommentModel commentRecord1 = commentData.get(indexCommentData1);
+            CommentModel commentRecord2 = commentData.get(indexCommentData2);
 
             // Add comment
-            commentStep(productName, commentRecord);
+            commentStep(productName, commentRecord1, commentRecord2);
             indexUrl++;
             // TODO: Test
 //            if (indexUrl == 3) {
@@ -71,14 +75,14 @@ public class Comment {
         return domain + tempUrl.replace("\"", "");
     }
 
-    public void commentStep(String productName, CommentModel commentModel) {
+    public void commentStep(String productName, CommentModel commentRecord1, CommentModel commentRecord2) {
         int rating = (int) CommonUtils.randomNumberGenerator(4, 5);
         System.out.println("Rating: " + rating);
         String xpathRating = "//*[@class='rating-" + rating + "']";
         CommonUtils.clickElementByJs(xpathRating);
-        CommonUtils.typeText("//*[@id='nickname_field']", commentModel.getName());
+        CommonUtils.typeText("//*[@id='nickname_field']", commentRecord1.getName());
         CommonUtils.typeText("//*[@id='summary_field']", "Khách hàng đánh giá sản phẩm: " + productName);
-        CommonUtils.typeText("//*[@id='review_field']", commentModel.getContent());
+        CommonUtils.typeText("//*[@id='review_field']", commentRecord2.getContent());
         CommonUtils.pause(2000);
         CommonUtils.clickElement("//*[@class='block review-add']//button[@type='submit']");
         CommonUtils.pause(3000);
